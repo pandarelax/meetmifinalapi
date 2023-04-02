@@ -46,5 +46,15 @@ namespace meetmifinal.data.Repositories
             _dbContext.Users.Remove(user);
             await _dbContext.SaveChangesAsync();
         }
+
+        public async Task<bool> CheckPasswordAsync(User user, string password)
+        {
+            return await _dbContext.Users.AnyAsync(u => u.Email == user.ToString() && u.Password == password);
+        }
+
+        public async Task<User> GetUserByEmailAsync(string email)
+        {
+            return await _dbContext.Users.FirstOrDefaultAsync(u => u.Email == email);
+        }
     }
 }

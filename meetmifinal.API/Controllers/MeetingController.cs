@@ -1,6 +1,7 @@
 ﻿using meetmifinal.api.Services;
 using meetmifinal.models.Entities;
 using meetmifinal.services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,7 @@ namespace meetmifinal.api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize]
     public class MeetingController : ControllerBase
     {
         private readonly IMeetingService _meetingService;

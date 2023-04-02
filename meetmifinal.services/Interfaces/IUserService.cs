@@ -14,5 +14,7 @@ namespace meetmifinal.services.Interfaces
         Task<User> AddUserAsync(User newUser);
         Task<User> UpdateUserAsync(User updatedUser);
         Task DeleteUserAsync(Guid id);
+        Task<bool> CheckPasswordAsync(User user, string password);
+        Task<User> GetUserByEmailAsync(string email);
     }
 }

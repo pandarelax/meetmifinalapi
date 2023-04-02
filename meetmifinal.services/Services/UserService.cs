@@ -1,6 +1,8 @@
 ﻿using meetmifinal.data.Interfaces;
 using meetmifinal.models.Entities;
 using meetmifinal.services.Interfaces;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -50,5 +52,18 @@ namespace meetmifinal.api.Services
             var user = await _userRepository.GetByIdAsync(id);
             await _userRepository.DeleteAsync(user);
         }
+
+        public async Task<bool> CheckPasswordAsync(string email, string password)
+        {
+            var user = await _userRepository.GetUserByEmailAsync(email);
+
+            if (user == null)
+            {
+                return false;
+            }
+
+            return await _userRepository.CheckPasswordAsync(user, password);
+        }
+
     }
 }
