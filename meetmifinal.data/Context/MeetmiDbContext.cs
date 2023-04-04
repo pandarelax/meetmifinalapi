@@ -27,7 +27,6 @@ namespace meetmifinal.data.Context
                 entity.Property(e => e.Email).HasMaxLength(100).IsRequired();
                 entity.Property(e => e.PhoneNumber).HasMaxLength(20);
                 entity.Property(e => e.PasswordHash).HasMaxLength(256).IsRequired();
-                entity.Property(e => e.PasswordSalt).HasMaxLength(128).IsRequired();
                 entity.Property(e => e.PhotoUrl).HasMaxLength(1000);
 
             });

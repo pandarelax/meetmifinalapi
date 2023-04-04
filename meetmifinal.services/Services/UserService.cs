@@ -65,5 +65,10 @@ namespace meetmifinal.api.Services
             return await _userRepository.CheckPasswordAsync(user, password);
         }
 
+        public async Task<User> GetUserByEmailAsync(string email)
+        {
+            return await _userRepository.GetUserByEmailAsync(email);
+        }
+
     }
 }
