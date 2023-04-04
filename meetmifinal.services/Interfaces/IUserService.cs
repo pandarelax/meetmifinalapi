@@ -16,5 +16,6 @@ namespace meetmifinal.services.Interfaces
         Task DeleteUserAsync(Guid id);
         Task<bool> CheckPasswordAsync(string email, string password);
         Task<User> GetUserByEmailAsync(string email);
+        Task UpdateRefreshTokenAsync(string refreshToken, User user, DateTime tokenDate, int addTimeToTokenDate);
     }
 }

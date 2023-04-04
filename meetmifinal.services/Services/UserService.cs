@@ -1,6 +1,7 @@
 ﻿using meetmifinal.data.Interfaces;
 using meetmifinal.models.Entities;
 using meetmifinal.services.Interfaces;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -70,5 +71,16 @@ namespace meetmifinal.api.Services
             return await _userRepository.GetUserByEmailAsync(email);
         }
 
+        public async Task UpdateRefreshTokenAsync(string refreshToken, User user, DateTime accessTokenDate, int addTimeToTokenDate)
+        {
+            if (user != null)
+            {
+                user.RefreshToken = refreshToken;
+                user.RefreshTokenEndDate = accessTokenDate.AddSeconds(addTimeToTokenDate);
+                await _userRepository.UpdateAsync(user);
+            }
+            else
+                throw new Exception("User not found");
+        }
     }
 }
