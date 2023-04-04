@@ -7,16 +7,16 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace meetmifinal.API.Controllers.Auth
+namespace meetmifinal.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class LoginController : ControllerBase
+    public class AuthController : ControllerBase
     {
         private readonly IUserService _userService;
         private readonly IConfiguration _configuration;
 
-        public LoginController(IUserService userService, IConfiguration configuration)
+        public AuthController(IUserService userService, IConfiguration configuration)
         {
             _userService = userService;
             _configuration = configuration;
@@ -26,7 +26,7 @@ namespace meetmifinal.API.Controllers.Auth
         [Route("login")]
         public async Task<ActionResult<User>> Login([FromBody] User login)
         {
-            
+
             var user = await _userService.GetUserByEmailAsync(login.Email);
             if (user != null && await _userService.CheckPasswordAsync(login.Email, login.Password))
             {
@@ -51,8 +51,9 @@ namespace meetmifinal.API.Controllers.Auth
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);
-            return  tokenHandler.WriteToken(token);
+            return tokenHandler.WriteToken(token);
         }
+
 
 
     }
