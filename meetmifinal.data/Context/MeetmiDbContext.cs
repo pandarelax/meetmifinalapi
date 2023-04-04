@@ -26,8 +26,11 @@ namespace meetmifinal.data.Context
                 entity.Property(e => e.LastName).HasMaxLength(50).IsRequired();
                 entity.Property(e => e.Email).HasMaxLength(100).IsRequired();
                 entity.Property(e => e.PhoneNumber).HasMaxLength(20);
-                entity.Property(e => e.PasswordHash).HasMaxLength(256).IsRequired();
+                entity.Property(e => e.Password).HasMaxLength(256).IsRequired();
                 entity.Property(e => e.PhotoUrl).HasMaxLength(1000);
+                entity.Property(e => e.RefreshToken).HasMaxLength(1000);
+                entity.Property(e => e.Token).HasMaxLength(1000);
+                entity.HasMany(e => e.Meetings).WithOne(e => e.Creator).HasForeignKey(e => e.UserId);
 
             });
 
@@ -38,7 +41,7 @@ namespace meetmifinal.data.Context
                 entity.Property(e => e.StartTime).IsRequired();
                 entity.Property(e => e.EndTime).IsRequired();
                 entity.Property(e => e.Description).HasMaxLength(5000);
-                entity.Property(e => e.UserId).IsRequired(); // UserId sütunu için gerekli olduğunu belirtiyoruz
+                entity.Property(e => e.UserId).IsRequired(); 
                 entity.HasOne(e => e.Creator).WithMany(e => e.Meetings).HasForeignKey(e => e.UserId);
             });
 
