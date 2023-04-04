@@ -24,19 +24,19 @@ namespace meetmifinal.API.Controllers.Auth
 
         [HttpPost]
         [Route("login")]
-        public async Task<ActionResult> Login([FromBody] User login)
+        public async Task<ActionResult<User>> Login([FromBody] User login)
         {
             
             var user = await _userService.GetUserByEmailAsync(login.Email);
-            if (user != null && await _userService.CheckPasswordAsync(user, login.Password))
+            if (user != null && await _userService.CheckPasswordAsync(login.Email, login.Password))
             {
-                var token = GenerateJwtTokenForUserAsync(user.Email, user.Id.ToString());
+                var token = GenerateJwtTokenForUserAsync(user);
                 return Ok(new { token });
             }
             return Unauthorized();
         }
 
-        public async Task<string> GenerateJwtTokenForUserAsync(string email, string userId)
+        private async Task<string> GenerateJwtTokenForUserAsync(User user)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.UTF8.GetBytes(_configuration["JwtSettings:SecretKey"]);
@@ -45,10 +45,9 @@ namespace meetmifinal.API.Controllers.Auth
             {
                 Subject = new ClaimsIdentity(new[]
                 {
-            new Claim(ClaimTypes.Email, email),
-            new Claim(ClaimTypes.NameIdentifier, userId)
+            new Claim(ClaimTypes.Email, user.Email),
         }),
-                Expires = DateTime.UtcNow.AddDays(7),
+                Expires = DateTime.UtcNow.AddDays(1),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);
