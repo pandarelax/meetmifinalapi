@@ -13,7 +13,6 @@ namespace meetmifinal.models.Entities
         public DateTime StartTime { get; set; }
         public DateTime? EndTime { get; set; }
         public string Description { get; set; }
-        public Guid UserId { get; set; }
-        public User? Creator { get; set; }
+        public User? CreatorId { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using meetmifinal.models.Entities;
+﻿using meetmifinal.models.DTOs.User;
+using meetmifinal.models.Entities;
 using meetmifinal.services.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -14,26 +15,21 @@ namespace meetmifinal.API.Controllers
     public class AuthController : ControllerBase
     {
         private readonly IUserService _userService;
+        private readonly IAuthService _authService;
         private readonly IConfiguration _configuration;
 
-        public AuthController(IUserService userService, IConfiguration configuration)
+        public AuthController(IUserService userService, IConfiguration configuration, IAuthService authService)
         {
             _userService = userService;
             _configuration = configuration;
+            _authService = authService;
         }
 
         [HttpPost]
         [Route("login")]
-        public async Task<ActionResult<User>> Login([FromBody] User login)
+        public async Task<Token> Login([FromBody] UserLoginDto login)
         {
-
-            var user = await _userService.GetUserByEmailAsync(login.Email);
-            if (user != null && await _userService.CheckPasswordAsync(login.Email, login.Password))
-            {
-                var token = GenerateJwtTokenForUserAsync(user);
-                return Ok(new { token });
-            }
-            return Unauthorized();
+            return await _authService.LoginAsync(login.Email, login.Password, 1);
         }
 
         private async Task<string> GenerateJwtTokenForUserAsync(User user)
@@ -45,9 +41,9 @@ namespace meetmifinal.API.Controllers
             {
                 Subject = new ClaimsIdentity(new[]
                 {
-            new Claim(ClaimTypes.Email, user.Email),
+            new Claim(ClaimTypes.Name, user.Id.ToString()),
         }),
-                Expires = DateTime.UtcNow.AddDays(1),
+                Expires = DateTime.UtcNow.AddHours(1),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);
