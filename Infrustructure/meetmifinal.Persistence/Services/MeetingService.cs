@@ -1,13 +1,13 @@
-﻿using meetmifinal.services.Interfaces;
-using meetmifinal.models.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using meetmifinal.data.Interfaces;
+using meetmifinal.Application.Abstractions.Services;
+using meetmifinal.Application.Repositories;
+using meetmifinal.Domain.Entities;
 
-namespace meetmifinal.api.Services
+namespace meetmifinal.Persistence.Services
 {
     public class MeetingService : IMeetingService
     {

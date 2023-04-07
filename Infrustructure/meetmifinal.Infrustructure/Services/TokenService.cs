@@ -1,5 +1,5 @@
-﻿using meetmifinal.models.Entities;
-using meetmifinal.services.Interfaces;
+﻿using meetmifinal.Application.Abstractions.Services;
+using meetmifinal.Domain.Entities;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -11,7 +11,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace meetmifinal.services.Services
+namespace meetmifinal.Infrasctructure.Services
 {
     public class TokenService : ITokenService
     {

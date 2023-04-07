@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33516.290
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "meetmifinal.API", "meetmifinal.API\meetmifinal.API.csproj", "{6227FB58-214A-4E95-8480-F90633816B0C}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{79F96A4E-0676-4FF6-925A-6CF490A81D72}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "meetmifinal.Application", "Core\meetmifinal.Application\meetmifinal.Application.csproj", "{5A3AF0E5-EE2F-4855-B92B-E328B55FFB2B}"
@@ -17,7 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "meetmifinal.Persistence", "
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{E9474AF6-693C-49FB-8042-28FD9CD95654}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "meetmifinal.Domain", "Core\meetmifinal.Domain\meetmifinal.Domain.csproj", "{BC737F94-F1BB-4702-9FC6-A2525D649EB8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "meetmifinal.Domain", "Core\meetmifinal.Domain\meetmifinal.Domain.csproj", "{BC737F94-F1BB-4702-9FC6-A2525D649EB8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "meetmifinal.API", "Presentation\meetmifinal.API\meetmifinal.API.csproj", "{967FD135-7C5D-49F4-8BD1-CFFB76B3A5D9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,10 +25,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{6227FB58-214A-4E95-8480-F90633816B0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6227FB58-214A-4E95-8480-F90633816B0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6227FB58-214A-4E95-8480-F90633816B0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6227FB58-214A-4E95-8480-F90633816B0C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5A3AF0E5-EE2F-4855-B92B-E328B55FFB2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5A3AF0E5-EE2F-4855-B92B-E328B55FFB2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5A3AF0E5-EE2F-4855-B92B-E328B55FFB2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -45,16 +41,20 @@ Global
 		{BC737F94-F1BB-4702-9FC6-A2525D649EB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BC737F94-F1BB-4702-9FC6-A2525D649EB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BC737F94-F1BB-4702-9FC6-A2525D649EB8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{967FD135-7C5D-49F4-8BD1-CFFB76B3A5D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{967FD135-7C5D-49F4-8BD1-CFFB76B3A5D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{967FD135-7C5D-49F4-8BD1-CFFB76B3A5D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{967FD135-7C5D-49F4-8BD1-CFFB76B3A5D9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{6227FB58-214A-4E95-8480-F90633816B0C} = {E9474AF6-693C-49FB-8042-28FD9CD95654}
 		{5A3AF0E5-EE2F-4855-B92B-E328B55FFB2B} = {79F96A4E-0676-4FF6-925A-6CF490A81D72}
 		{1C1BC630-54D4-4093-B588-9AACA647FC0D} = {824E44A2-78E9-44C1-A239-87BA8F0BB65B}
 		{2DC4520E-FA5E-4313-9065-CB9252D32BA6} = {824E44A2-78E9-44C1-A239-87BA8F0BB65B}
 		{BC737F94-F1BB-4702-9FC6-A2525D649EB8} = {79F96A4E-0676-4FF6-925A-6CF490A81D72}
+		{967FD135-7C5D-49F4-8BD1-CFFB76B3A5D9} = {E9474AF6-693C-49FB-8042-28FD9CD95654}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {85E0D057-6CB3-4E0F-AAA1-C215461A304A}

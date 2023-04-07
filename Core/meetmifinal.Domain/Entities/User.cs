@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace meetmifinal.models.Entities
+namespace meetmifinal.Domain.Entities
 {
     public class User
     {

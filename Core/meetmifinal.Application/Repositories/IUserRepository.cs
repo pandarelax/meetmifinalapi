@@ -1,11 +1,11 @@
-﻿using meetmifinal.models.Entities;
+﻿using meetmifinal.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace meetmifinal.data.Interfaces
+namespace meetmifinal.Application.Repositories
 {
     public interface IUserRepository
     {

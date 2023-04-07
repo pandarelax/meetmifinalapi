@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace meetmifinal.models.Entities
+namespace meetmifinal.Domain.Entities
 {
     public class Meeting
     {
@@ -14,5 +14,6 @@ namespace meetmifinal.models.Entities
         public DateTime? EndTime { get; set; }
         public string Description { get; set; }
         public User? CreatorId { get; set; }
+        public object UserId { get; set; }
     }
 }

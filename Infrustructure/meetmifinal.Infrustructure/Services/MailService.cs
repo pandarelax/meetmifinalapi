@@ -1,4 +1,4 @@
-﻿using meetmifinal.services.Interfaces;
+﻿using meetmifinal.Application.Abstractions.Services;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace meetmifinal.services.Services
+namespace meetmifinal.Infrasctructure.Services
 {
     public class MailService : IMailService
     {

@@ -1,20 +1,17 @@
-using meetmifinal.api.Services;
-using meetmifinal.data.Context;
-using meetmifinal.data.Interfaces;
-using meetmifinal.data.Repositories;
-using meetmifinal.services;
-using meetmifinal.services.Interfaces;
-using meetmifinal.services.Services;
+using meetmifinal.Application.Abstractions.Services;
+using meetmifinal.Application.Repositories;
+using meetmifinal.Infrasctructure.Services;
+using meetmifinal.Persistence.Contexts;
+using meetmifinal.Persistence.Repositories;
+using meetmifinal.Persistence.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 
 builder.Services.AddControllers();
 builder.Services.AddScoped<IUserService, UserService>();

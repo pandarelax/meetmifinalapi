@@ -1,8 +1,6 @@
-﻿using meetmifinal.data.Interfaces;
-using meetmifinal.models.Entities;
-using meetmifinal.services.Interfaces;
-using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.Identity;
+﻿using meetmifinal.Application.Abstractions.Services;
+using meetmifinal.Application.Repositories;
+using meetmifinal.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -10,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace meetmifinal.api.Services
+namespace meetmifinal.Persistence.Services
 {
     public class UserService : IUserService
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace meetmifinal.services.Interfaces
+namespace meetmifinal.Application.Abstractions.Services
 {
     public interface IMailService
     {

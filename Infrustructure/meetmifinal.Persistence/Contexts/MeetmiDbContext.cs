@@ -1,4 +1,4 @@
-﻿using meetmifinal.models.Entities;
+﻿using meetmifinal.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace meetmifinal.data.Context
+namespace meetmifinal.Persistence.Contexts
 {
     public class MeetmiDbContext : DbContext
     {
@@ -29,8 +29,8 @@ namespace meetmifinal.data.Context
                 entity.Property(e => e.Password).HasMaxLength(256).IsRequired();
                 entity.Property(e => e.PhotoUrl).HasMaxLength(1000);
                 entity.Property(e => e.RefreshToken).HasMaxLength(1000);
-                entity.Property(e => e.Token).HasMaxLength(1000);
-                entity.HasMany(e => e.Meetings).WithOne(e => e.Creator).HasForeignKey(e => e.UserId);
+                entity.Property(e => e.AccessToken).HasMaxLength(1000);
+                entity.HasMany(e => e.Meetings).WithOne(e => e.CreatorId).HasForeignKey(e => e.UserId);
 
             });
 
@@ -42,7 +42,7 @@ namespace meetmifinal.data.Context
                 entity.Property(e => e.EndTime).IsRequired();
                 entity.Property(e => e.Description).HasMaxLength(5000);
                 entity.Property(e => e.UserId).IsRequired(); 
-                entity.HasOne(e => e.Creator).WithMany(e => e.Meetings).HasForeignKey(e => e.UserId);
+                entity.HasOne(e => e.CreatorId).WithMany(e => e.Meetings).HasForeignKey(e => e.UserId);
             });
 
 

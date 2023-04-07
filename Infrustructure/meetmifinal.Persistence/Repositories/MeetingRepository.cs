@@ -1,6 +1,6 @@
-﻿using meetmifinal.data.Context;
-using meetmifinal.data.Interfaces;
-using meetmifinal.models.Entities;
+﻿using meetmifinal.Application.Repositories;
+using meetmifinal.Domain.Entities;
+using meetmifinal.Persistence.Contexts;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace meetmifinal.data.Repositories
+namespace meetmifinal.Persistence.Repositories
 {
     public class MeetingRepository : IMeetingRepository
     {

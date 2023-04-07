@@ -8,24 +8,17 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.4" />
-    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="7.0.4" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.4" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.4">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.4" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.4">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.28.1" />
   </ItemGroup>
 
-	<ItemGroup>
-		<ProjectReference Include="..\meetmifinal.data\meetmifinal.data.csproj" />
-		<ProjectReference Include="..\meetmifinal.models\meetmifinal.models.csproj" />
-		<ProjectReference Include="..\meetmifinal.services\meetmifinal.services.csproj" />
-	</ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Core\meetmifinal.Application\meetmifinal.Application.csproj" />
+    <ProjectReference Include="..\..\Core\meetmifinal.Domain\meetmifinal.Domain.csproj" />
+    <ProjectReference Include="..\..\Infrustructure\meetmifinal.Infrustructure\meetmifinal.Infrustructure.csproj" />
+    <ProjectReference Include="..\..\Infrustructure\meetmifinal.Persistence\meetmifinal.Persistence.csproj" />
+  </ItemGroup>
 
 </Project>

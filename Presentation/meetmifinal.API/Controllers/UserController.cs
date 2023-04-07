@@ -1,6 +1,5 @@
-﻿using meetmifinal.api.Services;
-using meetmifinal.models.Entities;
-using meetmifinal.services.Interfaces;
+﻿using meetmifinal.Application.Abstractions.Services;
+using meetmifinal.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System;
