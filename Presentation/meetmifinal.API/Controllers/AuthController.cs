@@ -1,6 +1,7 @@
 ﻿using meetmifinal.Application.Abstractions.Services;
 using meetmifinal.Application.DTOs.UserLoginDto;
 using meetmifinal.Domain.Entities;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -11,7 +12,8 @@ using System.Text;
 namespace meetmifinal.API.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/auth")]
+    [EnableCors]
     public class AuthController : ControllerBase
     {
         private readonly IUserService _userService;
@@ -29,25 +31,11 @@ namespace meetmifinal.API.Controllers
         [Route("login")]
         public async Task<Token> Login([FromBody] UserLoginDto login)
         {
-            return await _authService.LoginAsync(login.Email, login.Password, 1);
-        }
-
-        private async Task<string> GenerateJwtTokenForUserAsync(User user)
-        {
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.UTF8.GetBytes(_configuration["JwtSettings:SecretKey"]);
-
-            var tokenDescriptor = new SecurityTokenDescriptor
+            if (login == null)
             {
-                Subject = new ClaimsIdentity(new[]
-                {
-            new Claim(ClaimTypes.Name, user.Id.ToString()),
-        }),
-                Expires = DateTime.UtcNow.AddHours(1),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
-            };
-            var token = tokenHandler.CreateToken(tokenDescriptor);
-            return tokenHandler.WriteToken(token);
+                throw new Exception("Invalid login");
+            }
+            return await _authService.LoginAsync(login.Email, login.Password, 5);
         }
 
 

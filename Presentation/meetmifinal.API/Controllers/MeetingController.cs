@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 namespace meetmifinal.api.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/meetings")]
     [Authorize]
     public class MeetingController : ControllerBase
     {

@@ -22,26 +22,32 @@ namespace meetmifinal.Persistence.Services
             _userRepository = userRepository;
         }
 
-        public async Task<Token> LoginAsync(string email, string password, int tokenLifeTime) 
+        public async Task<Token> LoginAsync(string email, string password, int tokenLifeTime)
         {
             User user = await _userRepository.GetUserByEmailAsync(email);
-            
+
             if (user == null)
             {
                 throw new Exception("This email is not exist");
             }
 
-            var result = await _userRepository.CheckPasswordAsync(user, password);
-            if (result)
+            var result = await _userService.CheckPasswordAsync(email, password);
+            if (result == null)
             {
-                Token token = _tokenService.CreateToken(user, tokenLifeTime);
-                await _userService.UpdateRefreshTokenAsync(token.RefreshToken, user, token.Expiration, 15);
-                return token;
+                throw new Exception();
             }
+            Token token = _tokenService.CreateAccessToken(user, tokenLifeTime);
+            await _userService.UpdateRefreshTokenAsync(token.RefreshToken, user, token.Expiration, 15);
+            return token;
 
-            throw new Exception();
 
+        }
 
+        // SignUp method for user
+        public async Task<User> SignUpAsync(User newUser)
+        {
+            await _userRepository.AddAsync(newUser);
+            return newUser;
         }
     }
 }

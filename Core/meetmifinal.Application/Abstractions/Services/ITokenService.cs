@@ -9,7 +9,7 @@ namespace meetmifinal.Application.Abstractions.Services
 {
     public interface ITokenService
     {
-        Token CreateToken(User user, int tokenLifeTime);
+        Token CreateAccessToken(User user, int tokenLifeTime);
         string CreateRefreshToken();
     }
 }

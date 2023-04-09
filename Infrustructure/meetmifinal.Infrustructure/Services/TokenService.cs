@@ -22,7 +22,7 @@ namespace meetmifinal.Infrasctructure.Services
             _configuration = configuration;
         }
 
-        public Token CreateToken(User user, int tokenLifeTime)
+        public Token CreateAccessToken(User user, int tokenLifeTime)
         {
             Token token = new();
 

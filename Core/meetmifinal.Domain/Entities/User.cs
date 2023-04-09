@@ -16,7 +16,7 @@ namespace meetmifinal.Domain.Entities
         public string Password { get; set; }
         public string? AccessToken { get; set; }
         public string? RefreshToken { get; set; }
-        public DateTime RefreshTokenEndDate { get; set; }
+        public DateTime? RefreshTokenEndDate { get; set; }
         public string? PhotoUrl { get; set; }
         public List<Meeting>? Meetings { get; set; }
 

@@ -29,8 +29,9 @@ namespace meetmifinal.Persistence.Contexts
                 entity.Property(e => e.Password).HasMaxLength(256).IsRequired();
                 entity.Property(e => e.PhotoUrl).HasMaxLength(1000);
                 entity.Property(e => e.RefreshToken).HasMaxLength(1000);
+                entity.Property(e => e.RefreshTokenEndDate);
                 entity.Property(e => e.AccessToken).HasMaxLength(1000);
-                entity.HasMany(e => e.Meetings).WithOne(e => e.CreatorId).HasForeignKey(e => e.UserId);
+                entity.HasMany(e => e.Meetings).WithOne(e => e.User).HasForeignKey(e => e.UserId).OnDelete(DeleteBehavior.Cascade);
 
             });
 
@@ -40,9 +41,7 @@ namespace meetmifinal.Persistence.Contexts
                 entity.Property(e => e.Name).HasMaxLength(100).IsRequired();
                 entity.Property(e => e.StartTime).IsRequired();
                 entity.Property(e => e.EndTime).IsRequired();
-                entity.Property(e => e.Description).HasMaxLength(5000);
-                entity.Property(e => e.UserId).IsRequired(); 
-                entity.HasOne(e => e.CreatorId).WithMany(e => e.Meetings).HasForeignKey(e => e.UserId);
+                entity.HasOne(e => e.User).WithMany(e => e.Meetings).HasForeignKey(e => e.UserId).OnDelete(DeleteBehavior.Cascade);
             });
 
 
