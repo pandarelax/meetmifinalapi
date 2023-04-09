@@ -1,4 +1,5 @@
 ﻿using meetmifinal.Application.Abstractions.Services;
+using meetmifinal.Application.DTOs.User;
 using meetmifinal.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -51,14 +52,12 @@ namespace meetmifinal.api.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(Guid id, [FromBody] User user)
+        public async Task<IActionResult> Update(Guid id, [FromBody] UserUpdateDto newUser)
         {
-            if (id != user.Id)
-            {
-                return BadRequest();
-            }
-            await _userService.UpdateUserAsync(user);
-            return NoContent();
+
+            await _userService.UpdateUserAsync(id, newUser);
+
+            return Ok("User created");
         }
 
         [HttpDelete("{id}")]

@@ -1,4 +1,5 @@
 ﻿using meetmifinal.Application.Abstractions.Services;
+using meetmifinal.Application.DTOs.User;
 using meetmifinal.Application.Repositories;
 using meetmifinal.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -35,13 +36,14 @@ namespace meetmifinal.Persistence.Services
             return newUser;
         }
 
-        public async Task<User> UpdateUserAsync(User updatedUser)
+        public async Task<User> UpdateUserAsync(Guid id, UserUpdateDto updatedUser)
         {
-            var user = await _userRepository.GetByIdAsync(updatedUser.Id);
+            var user = await _userRepository.GetByIdAsync(id);
             user.FirstName = updatedUser.FirstName;
             user.LastName = updatedUser.LastName;
             user.Email = updatedUser.Email;
             user.PhoneNumber = updatedUser.PhoneNumber;
+            user.PhotoUrl = updatedUser.PhotoUrl;
             await _userRepository.UpdateAsync(user);
             return user;
         }

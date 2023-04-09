@@ -7,10 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="DTOs\Meeting\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\meetmifinal.Domain\meetmifinal.Domain.csproj" />
   </ItemGroup>
 
