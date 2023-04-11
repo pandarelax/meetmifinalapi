@@ -10,5 +10,6 @@ namespace meetmifinal.Application.Abstractions.Services
     public interface IAuthService
     {
         Task<Token> LoginAsync(string email, string password, int tokenLifeTime);
+        Task<User> SignUpAsync(User newUser);
     }
 }

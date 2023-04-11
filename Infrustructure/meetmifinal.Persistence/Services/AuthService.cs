@@ -4,6 +4,7 @@ using meetmifinal.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -25,13 +26,14 @@ namespace meetmifinal.Persistence.Services
         public async Task<Token> LoginAsync(string email, string password, int tokenLifeTime)
         {
             User user = await _userRepository.GetUserByEmailAsync(email);
+            string hashedPassword = HashPassword(password);
 
             if (user == null)
             {
                 throw new Exception("This email is not exist");
             }
 
-            var result = await _userService.CheckPasswordAsync(email, password);
+            var result = await _userService.CheckPasswordAsync(email, hashedPassword);
             if (result == null)
             {
                 throw new Exception();
@@ -46,8 +48,38 @@ namespace meetmifinal.Persistence.Services
         // SignUp method for user
         public async Task<User> SignUpAsync(User newUser)
         {
+
+            if (await CheckEmailExist(newUser.Email))
+            {
+                throw new Exception("This email is already exist");
+            }
+
+            newUser.Password = HashPassword(newUser.Password);
+
             await _userRepository.AddAsync(newUser);
             return newUser;
+        }
+
+        //Hash password
+        private string HashPassword(string password)
+        {
+            using (var sha256 = SHA256.Create())
+            {
+                byte[] hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
+
+                StringBuilder builder = new();
+                for (int i = 0; i < hashedBytes.Length; i++)
+                {
+                    builder.Append(hashedBytes[i].ToString("x2"));
+                }
+                return builder.ToString();
+            }
+        }
+
+        //check if email exist is db
+        private async Task<bool> CheckEmailExist(string email)
+        {
+            return await _userRepository.CheckEmailExistAsync(email);
         }
     }
 }

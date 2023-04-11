@@ -15,6 +15,7 @@ namespace meetmifinal.Application.Repositories
         Task UpdateAsync(User user);
         Task DeleteAsync(User user);
         Task<bool> CheckPasswordAsync(User user, string password);
+        Task<bool> CheckEmailExistAsync(string email);
         Task<User> GetUserByEmailAsync(string email);
     }
 }

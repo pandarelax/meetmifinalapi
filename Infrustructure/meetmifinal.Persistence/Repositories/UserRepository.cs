@@ -52,6 +52,13 @@ namespace meetmifinal.Persistence.Repositories
             return await _dbContext.Users.AnyAsync(u => u.Email == user.ToString() && u.Password == password);
         }
 
+        //check if email exists in database
+        public async Task<bool> CheckEmailExistAsync(string email)
+        {
+            return await _dbContext.Users.AnyAsync(u => u.Email == email);
+        }
+
+
         public async Task<User> GetUserByEmailAsync(string email)
         {
             return await _dbContext.Users.FirstOrDefaultAsync(u => u.Email == email);

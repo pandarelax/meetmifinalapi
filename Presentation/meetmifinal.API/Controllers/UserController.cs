@@ -19,10 +19,12 @@ namespace meetmifinal.api.Controllers
     public class UserController : ControllerBase
     {
         private readonly IUserService _userService;
+        private readonly IAuthService _authService;
 
-        public UserController(IUserService userService)
+        public UserController(IUserService userService, IAuthService authService)
         {
             _userService = userService;
+            _authService = authService;
         }
 
         [HttpGet]
@@ -47,7 +49,7 @@ namespace meetmifinal.api.Controllers
         public async Task<ActionResult<User>> Create([FromBody] User user)
         {
             user.Id = Guid.NewGuid();
-            await _userService.AddUserAsync(user);
+            await _authService.SignUpAsync(user);
             return CreatedAtAction(nameof(GetById), new { id = user.Id }, user);
         }
 

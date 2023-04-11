@@ -32,6 +32,7 @@ namespace meetmifinal.Persistence.Services
 
         public async Task<User> AddUserAsync(User newUser)
         {
+            //save hashed password to database
             await _userRepository.AddAsync(newUser);
             return newUser;
         }
