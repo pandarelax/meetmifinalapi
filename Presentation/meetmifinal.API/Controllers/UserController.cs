@@ -2,6 +2,8 @@
 using meetmifinal.Application.Abstractions.Services;
 using meetmifinal.Application.DTOs.User;
 using meetmifinal.Application.Features.Commands.User.CreateUser;
+using meetmifinal.Application.Features.Queries.User.GetAllUser;
+using meetmifinal.Application.Features.Queries.User.GetByIdUser;
 using meetmifinal.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -32,21 +34,21 @@ namespace meetmifinal.api.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<User>>> GetAll()
+        public async Task<ActionResult> GetAll()
         {
-            var users = await _userService.GetAllUsersAsync();
-            return Ok(users);
+            GetAllUserQueryResponse response = await _mediator.Send(new GetAllUserQueryRequest());
+            return Ok(response);
         }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetById(Guid id)
+        [HttpGet("{Id}")]
+        public async Task<ActionResult<User>> GetById([FromRoute] GetByIdUserRequest request)
         {
-            var user = await _userService.GetUserByIdAsync(id);
-            if (user == null)
+            GetByIdUserResponse response = await _mediator.Send(request);
+            if (response == null)
             {
                 return NotFound();
             }
-            return Ok(user);
+            return Ok(response);
         }
 
         [HttpPost]
