@@ -1,5 +1,7 @@
-﻿using meetmifinal.Application.Abstractions.Services;
+﻿using MediatR;
+using meetmifinal.Application.Abstractions.Services;
 using meetmifinal.Application.DTOs.User;
+using meetmifinal.Application.Features.Commands.User.CreateUser;
 using meetmifinal.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -20,11 +22,13 @@ namespace meetmifinal.api.Controllers
     {
         private readonly IUserService _userService;
         private readonly IAuthService _authService;
+        private readonly IMediator _mediator;
 
-        public UserController(IUserService userService, IAuthService authService)
+        public UserController(IUserService userService, IAuthService authService, IMediator mediator)
         {
             _userService = userService;
             _authService = authService;
+            _mediator = mediator;
         }
 
         [HttpGet]
@@ -46,11 +50,10 @@ namespace meetmifinal.api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<User>> Create([FromBody] User user)
+        public async Task<IActionResult> Create(CreateUserCommandRequest request)
         {
-            user.Id = Guid.NewGuid();
-            await _authService.SignUpAsync(user);
-            return CreatedAtAction(nameof(GetById), new { id = user.Id }, user);
+            CreateUserCommandResponse response = await _mediator.Send(request);
+            return Ok(response);
         }
 
         [HttpPut("{id}")]

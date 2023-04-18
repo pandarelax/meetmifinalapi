@@ -1,4 +1,6 @@
-﻿using meetmifinal.Domain.Entities;
+﻿using meetmifinal.Application.DTOs.User;
+using meetmifinal.Application.Features.Commands.User.CreateUser;
+using meetmifinal.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +12,6 @@ namespace meetmifinal.Application.Abstractions.Services
     public interface IAuthService
     {
         Task<Token> LoginAsync(string email, string password, int tokenLifeTime);
-        Task<User> SignUpAsync(User newUser);
+        Task<CreateUserCommandResponse> SignUpAsync(CreateUserDto model);
     }
 }

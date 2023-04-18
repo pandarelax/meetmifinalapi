@@ -1,5 +1,6 @@
 ﻿using meetmifinal.Application.Abstractions.Services;
 using meetmifinal.Application.DTOs.User;
+using meetmifinal.Application.Features.Commands.User.CreateUser;
 using meetmifinal.Application.Repositories;
 using meetmifinal.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -30,11 +31,23 @@ namespace meetmifinal.Persistence.Services
             return await _userRepository.GetByIdAsync(id);
         }
 
-        public async Task<User> AddUserAsync(User newUser)
+        public async Task<CreateUserCommandResponse> AddUserAsync(CreateUserDto model)
         {
-            //save hashed password to database
-            await _userRepository.AddAsync(newUser);
-            return newUser;
+            User user = new()
+            {
+                Id = Guid.NewGuid(),
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                Email = model.Email,
+                Password = model.Password,
+                PhoneNumber = model.PhoneNumber,
+            };
+
+            await _userRepository.AddAsync(user);
+
+            CreateUserCommandResponse response = new();
+
+            return response;
         }
 
         public async Task<User> UpdateUserAsync(Guid id, UserUpdateDto updatedUser)

@@ -36,7 +36,7 @@ namespace meetmifinal.Infrasctructure.Services
 
             SmtpClient smtp = new();
             smtp.Credentials = new NetworkCredential(_configuration["Mail:Username"], _configuration["Mail:Password"]);
-            smtp.Port = 587;
+            smtp.Port = Int32.Parse(_configuration["Mail:Port"]);
             smtp.EnableSsl = true;
             smtp.Host = _configuration["Mail:Host"];
             await smtp.SendMailAsync(mail);

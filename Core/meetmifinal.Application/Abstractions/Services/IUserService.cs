@@ -1,4 +1,5 @@
 ﻿using meetmifinal.Application.DTOs.User;
+using meetmifinal.Application.Features.Commands.User.CreateUser;
 using meetmifinal.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ namespace meetmifinal.Application.Abstractions.Services
     {
         Task<IEnumerable<User>> GetAllUsersAsync();
         Task<User> GetUserByIdAsync(Guid id);
-        Task<User> AddUserAsync(User newUser);
+        Task<CreateUserCommandResponse> AddUserAsync(CreateUserDto model);
         Task<User> UpdateUserAsync(Guid id, UserUpdateDto updatedUser);
         Task DeleteUserAsync(Guid id);
         Task<bool> CheckPasswordAsync(string email, string password);

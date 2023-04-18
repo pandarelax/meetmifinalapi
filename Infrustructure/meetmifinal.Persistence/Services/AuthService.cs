@@ -1,4 +1,6 @@
 ﻿using meetmifinal.Application.Abstractions.Services;
+using meetmifinal.Application.DTOs.User;
+using meetmifinal.Application.Features.Commands.User.CreateUser;
 using meetmifinal.Application.Repositories;
 using meetmifinal.Domain.Entities;
 using System;
@@ -46,18 +48,31 @@ namespace meetmifinal.Persistence.Services
         }
 
         // SignUp method for user
-        public async Task<User> SignUpAsync(User newUser)
+        public async Task<CreateUserCommandResponse> SignUpAsync(CreateUserDto model)
         {
 
-            if (await CheckEmailExist(newUser.Email))
+            if (await CheckEmailExist(model.Email))
             {
                 throw new Exception("This email is already exist");
             }
 
-            newUser.Password = HashPassword(newUser.Password);
+            model.Password = HashPassword(model.Password);
 
-            await _userRepository.AddAsync(newUser);
-            return newUser;
+            User user = new()
+            {
+                Id = Guid.NewGuid(),
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                Email = model.Email,
+                Password = model.Password,
+                PhoneNumber = model.PhoneNumber,
+            };
+
+            await _userRepository.AddAsync(user);
+
+            CreateUserCommandResponse response = new();
+
+            return response;
         }
 
         //Hash password
