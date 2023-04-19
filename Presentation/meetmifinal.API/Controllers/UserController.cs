@@ -2,6 +2,7 @@
 using meetmifinal.Application.Abstractions.Services;
 using meetmifinal.Application.DTOs.User;
 using meetmifinal.Application.Features.Commands.User.CreateUser;
+using meetmifinal.Application.Features.Commands.User.DeleteUser;
 using meetmifinal.Application.Features.Queries.User.GetAllUser;
 using meetmifinal.Application.Features.Queries.User.GetByIdUser;
 using meetmifinal.Domain.Entities;
@@ -67,11 +68,11 @@ namespace meetmifinal.api.Controllers
             return Ok("User created");
         }
 
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete([FromRoute] Guid id)
+        [HttpDelete("{Id}")]
+        public async Task<IActionResult> Delete([FromRoute] DeleteUserCommandRequest request)
         {
-            await _userService.DeleteUserAsync(id);
-            return NoContent();
+            DeleteUserCommandResponse response = await _mediator.Send(request);
+            return Ok(response);
         }
 
         private string GenerateJwtToken(string email)

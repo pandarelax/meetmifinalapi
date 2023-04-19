@@ -1,5 +1,6 @@
 ﻿using meetmifinal.Application.DTOs.User;
 using meetmifinal.Application.Features.Commands.User.CreateUser;
+using meetmifinal.Application.Features.Commands.User.DeleteUser;
 using meetmifinal.Application.Features.Queries.User.GetByIdUser;
 using meetmifinal.Domain.Entities;
 using System;

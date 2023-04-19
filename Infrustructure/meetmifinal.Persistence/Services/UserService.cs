@@ -1,6 +1,7 @@
 ﻿using meetmifinal.Application.Abstractions.Services;
 using meetmifinal.Application.DTOs.User;
 using meetmifinal.Application.Features.Commands.User.CreateUser;
+using meetmifinal.Application.Features.Commands.User.DeleteUser;
 using meetmifinal.Application.Repositories;
 using meetmifinal.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -66,6 +67,7 @@ namespace meetmifinal.Persistence.Services
         {
             var user = await _userRepository.GetByIdAsync(id);
             await _userRepository.DeleteAsync(user);
+
         }
 
         public async Task<bool> CheckPasswordAsync(string email, string password)
